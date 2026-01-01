@@ -1,5 +1,11 @@
 # Changelog
 
+### v5.20.15 (2026-01-01)
+
+No changes since the previous release.
+
+Compare with the previous release: [v5.20.14](https://github.com/c0rejs/ext/compare/v5.20.14...v5.20.15)
+
 ### v5.20.14 (2026-01-01)
 
 **Code refactoring:**
