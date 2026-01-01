@@ -1,5 +1,17 @@
 # Changelog
 
+### v5.20.14 (2026-01-01)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: update build script (● [7c3a902](https://github.com/c0rejs/ext/commit/7c3a902), [f053514](https://github.com/c0rejs/ext/commit/f053514); 👬 zdm)
+
+**Other changes:**
+
+- chore: remove lintignore (● [e41f790](https://github.com/c0rejs/ext/commit/e41f790); 👬 zdm)
+
+Compare with the previous release: [v5.20.13](https://github.com/c0rejs/ext/compare/v5.20.13...v5.20.14)
+
 ### v5.20.13 (2025-12-17)
 
 **Code refactoring:**
