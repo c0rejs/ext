@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.20.27 (2026-03-18)
+
+**Other changes:**
+
+- chore(metadata): update package metadata (● [4bba538](https://github.com/corejslib/ext/commit/4bba538); 👬 zdm)
+
+Compare with the previous release: [v5.20.26](https://github.com/corejslib/ext/compare/v5.20.26...v5.20.27)
+
 ### v5.20.26 (2026-03-06)
 
 **Other changes:**
