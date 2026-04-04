@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.1 (2026-04-04)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix sencha versions (● [2715142](https://github.com/corejslib/ext/commit/2715142); 👬 zdm)
+
+Compare with the previous release: [v5.21.0](https://github.com/corejslib/ext/compare/v5.21.0...v5.21.1)
+
 ### v5.21.0 (2026-04-04)
 
 **New features:**
