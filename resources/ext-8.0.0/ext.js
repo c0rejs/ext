@@ -91694,7 +91694,7 @@ Ext.define(
                 result = result || {};
                 name = field.name;
                 prop = field.summaryField || name;
-                if ( name !== "id" ) {
+                if ( name !== this.idProperty ) {
                     result[ name ] = summary
                         ? summary.calculate( records, prop, "data", 0, recLen )
                         : undefined;
@@ -173778,6 +173778,7 @@ Ext.define( "Ext.Dialog", {
      * @inheritdoc
      */
     "classCls": Ext.baseCSSPrefix + "dialog",
+    "relativeMaximizeCls": Ext.baseCSSPrefix + "relative-maximize",
 
     /**
      * @event beforemaximize
@@ -173893,8 +173894,9 @@ Ext.define( "Ext.Dialog", {
     "config": {
 
         /**
-         * @cfg {Boolean/Ext.drag.Constraint} constrainDrag
+         * @cfg {String/Boolean/Ext.drag.Constraint} constrainDrag
          * Set to `false` to not constrain the dialog to the viewport.
+         * Set to 'owner' to constrain the dialog to its parent container (since 8.0.0).
          *
          * @since 6.5.0
          */
@@ -173913,15 +173915,19 @@ Ext.define( "Ext.Dialog", {
         "dismissHandler": null,
 
         /**
-         * @cfg {Boolean} [maximizable=false]
+         * @cfg {Boolean/String/Ext.dom.Element} [maximizable=false]
          * Set to `true` to display the 'maximizeTool` to allow the user to maximize the
          * dialog. Note that when a dialog is maximized, the `maximizeTool` is replaced
          * with the `restoreTool` to give the user the ability to restore the dialog to
          * its previous size.
+         * Set to `'owner'` to maximize the dialog within its owner component's bounds (since 8.0.0)
+         * Set to an `Ext.dom.Element` to maximize the dialog within that
+         * element's bounds (since 8.0.0).
          *
-         * This config only controls the presence of the `maximize` and `restore` tools.
-         * The dialog can always be set to `maximized` by directly setting the config or
-         * calling the `maximize` and `restore` methods.
+         * This config controls both the presence of the `maximize` and `restore` tools
+         * and determines the region that the dialog will maximize to. The dialog can
+         * always be set to `maximized` by directly setting the config or calling the
+         * `maximize` and `restore` methods.
          *
          * @since 6.5.0
          */
@@ -174093,8 +174099,12 @@ Ext.define( "Ext.Dialog", {
         me.el.on( "click", "handleFocus", this );
     },
     "doDestroy": function () {
-        Ext.destroy( this.maximizeTool, this.restoreTool );
-        this.callParent();
+        var me = this;
+        if ( me.resizeListener ) {
+            me.resizeListener.un( "resize", me.onParentResize, me );
+        }
+        Ext.destroy( me.maximizeTool, me.restoreTool, me.restoreState );
+        me.callParent();
     },
     "close": function ( event ) {
         var me = this,
@@ -174219,10 +174229,14 @@ Ext.define( "Ext.Dialog", {
     // Configs
     // constrainDrag
     "updateConstrainDrag": function ( constrain ) {
-        var dragger = this.getDraggable();
+        var dragger = this.getDraggable(),
+            ownerCt = this.getParent();
         if ( dragger ) {
             if ( constrain === true ) {
                 constrain = Ext.getBody();
+            }
+            else if ( constrain === "owner" && ownerCt ) {
+                constrain = ownerCt.el.getRegion();
             }
             dragger.setConstrain( constrain );
         }
@@ -174253,11 +174267,27 @@ Ext.define( "Ext.Dialog", {
             }
         }
     },
+    "onAdded": function ( parent, instanced ) {
+        var me = this,
+            dragger;
+        dragger = me.getDraggable();
+
+        // Constrain dialog to parent container when constrainDrag is 'owner'
+        if ( parent && me.getConstrainDrag() === "owner" ) {
+            dragger.setConstrain( parent.el.getRegion() );
+        }
+        if ( parent && !me.resizeListener ) {
+            me.resizeListener = parent.on( "resize", me.onParentResize, me, {
+                "delay": 300,
+            } );
+        }
+        this.callParent( arguments );
+    },
 
     // maximizable
     "applyMaximizable": function ( maximizable ) {
         var me = this;
-        me.maximizeTool = Ext.updateWidget( me.maximizeTool, maximizable, me, "createMaximizeTool", "maximizeTool" );
+        me.maximizeTool = Ext.updateWidget( me.maximizeTool, maximizable === "owner" || maximizable === true || ( maximizable && maximizable.isElement ), me, "createMaximizeTool", "maximizeTool" );
         me.syncHeaderItems();
         return maximizable;
     },
@@ -174285,27 +174315,29 @@ Ext.define( "Ext.Dialog", {
         var me = this,
             el = me.el,
             maximizedCls = me.maximizedCls,
+            relativeMaximizeCls = me.relativeMaximizeCls,
             maximizeTool = me.maximizeTool,
             pendingName = maximized
                 ? "restoring"
                 : "maximizing",
             pending = me[ pendingName ],
-            after,
+            maximizable = me.getMaximizable(),
+            isRelative = maximizable === "owner" || ( maximizable && maximizable.isElement ),
             anim,
             before,
+            after,
             center;
         if ( me.isConfiguring ) {
             me.needsCenter = maximized;
         }
         else {
-            anim = me._maximizeAnim;
+            anim = me._maximizeAnim !== undefined
+                ? me._maximizeAnim
+                : maximized
+                    ? me.getMaximizeAnimation()
+                    : me.getRestoreAnimation();
             center = me.needsCenter && !maximized;
             me.needsCenter = false;
-            if ( anim === undefined ) {
-                anim = me[ maximized
-                    ? "getMaximizeAnimation"
-                    : "getRestoreAnimation" ]();
-            }
         }
         me._maximizeAnim = undefined;
 
@@ -174315,7 +174347,7 @@ Ext.define( "Ext.Dialog", {
         }
 
         // this pushes anim to end and calls our callback
-        if ( me.getMaximizable() ) {
+        if ( maximizable ) {
             me.setRestorable( maximized );
         }
         else {
@@ -174328,6 +174360,18 @@ Ext.define( "Ext.Dialog", {
             maximizeTool.setHidden( maximized );
         }
         if ( !anim ) {
+            if ( isRelative ) {
+                maximizedCls = relativeMaximizeCls;
+                if ( !me.restoreState ) {
+                    me.restoreState = me.el.getBox();
+                }
+                after = maximized
+                    ? me.captureSize( true )
+                    : me.restoreState;
+                el.setMaxWidth( null );
+                el.setMaxHeight( null );
+                el.setBox( after );
+            }
             el.toggleCls( maximizedCls, maximized );
             if ( center ) {
                 me.center();
@@ -174335,42 +174379,59 @@ Ext.define( "Ext.Dialog", {
             me.fireEvent( maximized
                 ? "maximize"
                 : "restore", me );
+            return;
+        }
+        if ( maximized ) {
+
+            // When we are maximizing, we need the current size (before) and the
+            // viewport size (after). We don't add the x-maximized class until
+            // after the animation.
+            before = me.captureSize();
+            after = me.captureSize( true );
+            pendingName = "maximizing";
         }
         else {
-            if ( maximized ) {
-                pendingName = "maximizing";
-
-                // When we are maximizing, we need the current size (before) and the
-                // viewport size (after). We don't add the x-maximized class until
-                // after the animation.
-                before = me.captureSize();
-                after = me.captureSize( true );
+            before = me.captureSize( true );
+            after = me.restoreState;
+            if ( !after ) {
+                after = me.el.getBox();
             }
-            else {
-                pendingName = "restoring";
 
-                // When restoring, we snap the dialog to the restored size immediately
-                // and animate the proxy from fullscreen down to that place.
-                el.removeCls( maximizedCls );
-                if ( center ) {
-                    me.center();
-                }
-                before = me.captureSize( true );
-                after = me.captureSize();
+            // fallback to current size
+            if ( isRelative ) {
+                maximizedCls = relativeMaximizeCls;
+                el.setBox( after );
             }
-            me[ pendingName ] = me.animateMaximizeRestore( before, after, anim, function () {
-                if ( maximized ) {
+            el.toggleCls( maximizedCls, maximized );
+            if ( center ) {
+                me.center();
+            }
 
-                    // Now that the proxy has animated up and is gone, snap the dialog
-                    // to full screen.
-                    el.addCls( maximizedCls );
-                }
-                me[ pendingName ] = null;
-                me.fireEvent( maximized
-                    ? "maximize"
-                    : "restore", me );
-            } );
+            // When we are restoring, we animate the proxy dialog to the original size
+            pendingName = "restoring";
         }
+        me[ pendingName ] = me.animateMaximizeRestore( before, after, anim, function () {
+            if ( maximized ) {
+
+                // Now that the proxy has animated up and is gone, snap the dialog
+                // to full screen if maximizable is true.
+                el.addCls( isRelative
+                    ? relativeMaximizeCls
+                    : maximizedCls );
+                if ( !isRelative && !after ) {
+                    after = me.el.getBox();
+                }
+                if ( isRelative ) {
+                    el.setMaxWidth( null );
+                    el.setMaxHeight( null );
+                    el.setBox( after );
+                }
+            }
+            me[ pendingName ] = null;
+            me.fireEvent( maximized
+                ? "maximize"
+                : "restore", me );
+        } );
     },
 
     // maximizeTool
@@ -174470,6 +174531,7 @@ Ext.define( "Ext.Dialog", {
         "draggableCls": Ext.baseCSSPrefix + "draggable",
         "needsCenter": false,
         "maximizedCls": Ext.baseCSSPrefix + "maximized",
+        "restoreState": null,
         "animateMaximizeRestore": function ( before, after, anim, callback ) {
             var me = this,
                 pending = new Ext.Deferred(),
@@ -174479,16 +174541,16 @@ Ext.define( "Ext.Dialog", {
 
                         // duration: 3000,
                         "from": {
-                            "width": before.w + "px",
-                            "height": before.h + "px",
+                            "width": before.width + "px",
+                            "height": before.height + "px",
                             "transform": {
                                 "translateX": before.x + "px",
                                 "translateY": before.y + "px",
                             },
                         },
                         "to": {
-                            "width": after.w + "px",
-                            "height": after.h + "px",
+                            "width": after.width + "px",
+                            "height": after.height + "px",
                             "transform": {
                                 "translateX": after.x + "px",
                                 "translateY": after.y + "px",
@@ -174516,22 +174578,47 @@ Ext.define( "Ext.Dialog", {
             return pending;
         },
         "captureSize": function ( maximized ) {
-            var me, size;
-            if ( maximized ) {
-                return {
-                    "x": 0,
-                    "y": 0,
-                    "w": Ext.getViewportWidth(),
-                    "h": Ext.getViewportHeight(),
-                };
+            var me = this,
+                position;
+            if ( !maximized ) {
+                position = me.el.getBox();
+                me.restoreState = position;
+                return position;
             }
-            me = this;
-            size = me.el.measure();
+            return me.getMaximizeRegion();
+        },
+
+        /**
+         * Returns the region to which the dialog should maximize.
+         * This region is determined based on the `maximizable` config.
+         * If `maximizable` is set to 'owner', it returns the box of the parent container.
+         * If `maximizable` is an `Ext.dom.Element`, it returns the box of that element.
+         * If `maximizable` is `true`, `false`, or `null`, it defaults to the full viewport size.
+         * @return {Object} An object with `x`, `y`, `width`, and `height` properties
+         * representing the region to which the dialog should maximize.
+         */
+        "getMaximizeRegion": function () {
+            var me = this,
+                maximizable = me.getMaximizable(),
+                parent;
+
+            // Handle 'owner' type
+            if ( maximizable === "owner" ) {
+                parent = me.getParent();
+                return parent.el.getBox();
+            }
+
+            // Handle Ext.dom.Element type
+            if ( maximizable && maximizable.isElement ) {
+                return me.getOwnerContainer( maximizable.component );
+            }
+
+            // Handle true, false, null, or any other value - default to full viewport
             return {
-                "x": me.getX(),
-                "y": me.getY(),
-                "w": size.width,
-                "h": size.height,
+                "x": 0,
+                "y": 0,
+                "width": Ext.getViewportWidth(),
+                "height": Ext.getViewportHeight(),
             };
         },
         "syncHeaderItems": function () {
@@ -174568,6 +174655,40 @@ Ext.define( "Ext.Dialog", {
             // one of them...
             if ( !this._centering && this.getCentered() ) {
                 this.setCentered( false );
+            }
+        },
+
+        /**
+         * Recursively traverses up the component hierarchy to find the nearest parent
+         * that is a container (i.e., has `isContainer: true`) and returns the result
+         * of calling `getBox()` on its element.
+         *
+         * This function is useful in scenarios where a component is deeply nested inside
+         * non-container components, and you want to determine the box dimensions of the
+         * nearest logical container for operations like constraining dialogs.
+         *
+         * @param {Ext.Component} component The component from which to start the traversal.
+         * @return {Object|null} The box object (with `x`, `y`, `width`, `height`)
+         * of the container's element,
+         * or `null` if no suitable container is found.
+         */
+        "getOwnerContainer": function ( component ) {
+            while ( component && !component.isContainer ) {
+                component = component.getParent && component.getParent();
+            }
+            return component
+                ? component.el.getBox()
+                : null;
+        },
+        "onParentResize": function () {
+            var me = this,
+                maximized = me.getMaximized(),
+                maximizable = me.getMaximizable(),
+                isRelative = maximizable === "owner" || ( maximizable && maximizable.isElement ),
+                after;
+            if ( maximized && isRelative ) {
+                after = me.captureSize( true );
+                me.el.setBox( after );
             }
         },
     },
@@ -175063,7 +175184,7 @@ Ext.define( "Ext.field.Field", {
          * - `under` Add a `div` beneath the field containing the error message.
          * @since 6.5.0
          */
-        "errorTarget": "under",
+        "errorTarget": "qtip",
 
         /**
          * @cfg {String/String[]/Ext.XTemplate} errorTpl
@@ -175167,6 +175288,7 @@ Ext.define( "Ext.field.Field", {
     "errorElement": null,
     "errorIconElement": null,
     "errorMessageElement": null,
+    "ariaStatusElement": null,
     "element": {
         "reference": "element",
         "classList": [ Ext.supports.CSSMinContent
@@ -175229,6 +175351,13 @@ Ext.define( "Ext.field.Field", {
                             },
                         ],
                     },
+                    {
+                        "reference": "ariaStatusElement",
+                        "cls": Ext.baseCSSPrefix + "aria-status-el " + Ext.baseCSSPrefix + "hidden-offsets",
+                        "tag": "span",
+                        "aria-live": "polite",
+                        "aria-hidden": "true",
+                    },
                 ],
             },
         ];
@@ -175239,6 +175368,9 @@ Ext.define( "Ext.field.Field", {
 
         // alias for backward compatibility
         this.innerElement = this.innerElement || this.bodyElement;
+        this.ariaStatusElement.set( {
+            "id": this.getId() + "-ariaStatusEl",
+        } );
     },
     "onFocusLeave": function ( e ) {
         this.callParent( [ e ] );
@@ -175297,8 +175429,17 @@ Ext.define( "Ext.field.Field", {
         } );
     },
     "updateError": function ( value ) {
-        var msg = this.formatErrors( Ext.Array.from( value ) );
-        this.setErrorMessage( msg );
+        var me = this,
+            msg = me.formatErrors( Ext.Array.from( value ) );
+        if ( !me.isAriaRoleStatic( me.ariaRole ) ) {
+            me.ariaEl.set( {
+                "aria-invalid": msg
+                    ? true
+                    : false,
+            } );
+        }
+        me.ariaStatusElement.dom.innerHTML = Ext.String.htmlEncode( msg || "" );
+        me.setErrorMessage( msg );
     },
     "updateErrorMessage": function ( msg ) {
         var me = this,
@@ -175476,11 +175617,16 @@ Ext.define( "Ext.field.Field", {
         this.name = newName;
     },
     "updateRequired": function ( required ) {
-        var me = this;
+        var me = this,
+            component;
         me.element.toggleCls( me.requiredCls, required );
         if ( !me.isConfiguring ) {
             me.validate();
         }
+        component = me.isCheckboxGroup || me.isRadioGroup
+            ? me.getContainer()
+            : me;
+        component.ariaEl.dom.required = !!required;
     },
     "updateRequiredMessage": function () {
         if ( !this.isConfiguring ) {
@@ -229250,6 +229396,14 @@ Ext.define( "Ext.grid.menu.Columns", {
             // See HeaderContainer#updateMenuDisabledState for keeping this
             // synched while hiding and showing columns.
             if ( col.getHideable() ) {
+
+                // If nested header group items is moved to different region,
+                // and parent header is destroyed then the last moved column menu item will
+                // also be destroyed, try to re-create the menu check item.
+                if ( col._hideShowMenuItem && col._hideShowMenuItem.destroyed ) {
+                    col.setHideShowMenuItem( null );
+                    col.setHideShowMenuItem( col.config.hideShowMenuItem );
+                }
                 items.push( col.getHideShowMenuItem() );
             }
         }
@@ -248497,9 +248651,15 @@ Ext.define( "Ext.grid.plugin.ViewOptions", {
     "onVisibleIndicatorTap": function ( row, record ) {
         var hidden = !record.get( "hidden" ),
             column = Ext.getCmp( record.get( "id" ) ),
-            len = this.getGrid().getVisibleColumns().length;
+            len = this.getGrid().getVisibleColumns().length,
+            hideShowMenuItem = column.getHideShowMenuItem();
         if ( len > 1 || ( len && column.isHidden() ) ) {
             column.setHidden( hidden );
+
+            // Update the checked state of hideShowMenuItem on visible indicator tap
+            if ( hideShowMenuItem ) {
+                hideShowMenuItem.setChecked( !hidden );
+            }
             record.set( "hidden", hidden );
         }
     },
