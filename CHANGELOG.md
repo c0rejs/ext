@@ -1,5 +1,17 @@
 # Changelog
 
+### v5.21.0 (2026-04-04)
+
+**New features:**
+
+- \[MINOR] feat: add extjs 8.0.0 (● [fc064ec](https://github.com/corejslib/ext/commit/fc064ec), [7853d38](https://github.com/corejslib/ext/commit/7853d38), [c3a0cbe](https://github.com/corejslib/ext/commit/c3a0cbe), [0ffb4dc](https://github.com/corejslib/ext/commit/0ffb4dc), [1a36db1](https://github.com/corejslib/ext/commit/1a36db1), [458a3b0](https://github.com/corejslib/ext/commit/458a3b0), [f567ba9](https://github.com/corejslib/ext/commit/f567ba9), [0b929ac](https://github.com/corejslib/ext/commit/0b929ac), [db29a08](https://github.com/corejslib/ext/commit/db29a08), [c953ddb](https://github.com/corejslib/ext/commit/c953ddb), [8458936](https://github.com/corejslib/ext/commit/8458936), [1d0cc1c](https://github.com/corejslib/ext/commit/1d0cc1c), [cb6cd8f](https://github.com/corejslib/ext/commit/cb6cd8f), [7ff5492](https://github.com/corejslib/ext/commit/7ff5492), [376dc96](https://github.com/corejslib/ext/commit/376dc96), [cefbc07](https://github.com/corejslib/ext/commit/cefbc07); 👬 zdm)
+
+**Other changes:**
+
+- build(deps): bump @sencha@^8.0.0 (● [444d447](https://github.com/corejslib/ext/commit/444d447); 👬 zdm)
+
+Compare with the previous release: [v5.20.27](https://github.com/corejslib/ext/compare/v5.20.27...v5.21.0)
+
 ### v5.20.27 (2026-03-18)
 
 **Other changes:**
