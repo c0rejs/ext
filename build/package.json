@@ -24,13 +24,13 @@
     },
     "devDependencies": {
         "@corejslib/core": "^7.192.0",
-        "@sencha/cmd": "^7.9.0",
-        "@sencha/ext": "^7.9.0",
-        "@sencha/ext-charts": "^7.9.0",
-        "@sencha/ext-google": "^7.9.0",
-        "@sencha/ext-modern": "^7.9.0",
-        "@sencha/ext-modern-theme-material": "^7.9.0",
-        "@sencha/ext-ux": "^7.9.0",
+        "@sencha/cmd": "^8.0.0",
+        "@sencha/ext": "^8.0.0",
+        "@sencha/ext-charts": "^8.0.0",
+        "@sencha/ext-google": "^8.0.0",
+        "@sencha/ext-modern": "^8.0.0",
+        "@sencha/ext-modern-theme-material": "^8.0.0",
+        "@sencha/ext-ux": "^8.0.0",
         "@sencha/ext-web-components-modern": "^7.5.0",
         "@softvisio/cli": "^3.91.5"
     }
