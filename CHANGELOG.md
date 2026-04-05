@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.2 (2026-04-05)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: convert scripts to bash (● [9568532](https://github.com/corejslib/ext/commit/9568532); 👬 zdm)
+
+Compare with the previous release: [v5.21.1](https://github.com/corejslib/ext/compare/v5.21.1...v5.21.2)
+
 ### v5.21.1 (2026-04-04)
 
 **Bug fixes:**
