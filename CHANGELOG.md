@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.4 (2026-04-24)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: update sh error trap (● [56c3bc5](https://github.com/corejslib/ext/commit/56c3bc5); 👬 zdm)
+
+Compare with the previous release: [v5.21.3...v5.21.4](https://github.com/corejslib/ext/compare/v5.21.3...v5.21.4)
+
 ### v5.21.3 (2026-04-20)
 
 **Code refactoring:**
