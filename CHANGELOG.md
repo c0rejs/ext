@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.5 (2026-04-26)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix sh error trap (● [790d971](https://github.com/corejslib/ext/commit/790d971); 👬 zdm)
+
+Compare with the previous release: [v5.21.4...v5.21.5](https://github.com/corejslib/ext/compare/v5.21.4...v5.21.5)
+
 ### v5.21.4 (2026-04-24)
 
 **Code refactoring:**
