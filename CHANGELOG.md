@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.6 (2026-05-07)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename softvisio-cli to scli (● [4d3eae3](https://github.com/corejslib/ext/commit/4d3eae3); 👬 zdm)
+
+Compare with the previous release: [v5.21.5...v5.21.6](https://github.com/corejslib/ext/compare/v5.21.5...v5.21.6)
+
 ### v5.21.5 (2026-04-26)
 
 **Bug fixes:**
