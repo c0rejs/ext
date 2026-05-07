@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.7 (2026-05-07)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename cli.config.yaml to scli.config.yaml (● [c40f721](https://github.com/corejslib/ext/commit/c40f721); 👬 zdm)
+
+Compare with the previous release: [v5.21.6...v5.21.7](https://github.com/corejslib/ext/compare/v5.21.6...v5.21.7)
+
 ### v5.21.6 (2026-05-07)
 
 **Code refactoring:**
