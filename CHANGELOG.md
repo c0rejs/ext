@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.8 (2026-05-11)
+
+**Bug fixes:**
+
+- \[PATCH] fix: catch errors in promises (● [cbad952](https://github.com/corejslib/ext/commit/cbad952); 👬 zdm)
+
+Compare with the previous release: [v5.21.7...v5.21.8](https://github.com/corejslib/ext/compare/v5.21.7...v5.21.8)
+
 ### v5.21.7 (2026-05-07)
 
 **Code refactoring:**
