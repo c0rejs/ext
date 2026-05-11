@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.9 (2026-05-11)
+
+**Other changes:**
+
+- chore: remove ext v7 (● [09171cf](https://github.com/corejslib/ext/commit/09171cf); 👬 zdm)
+
+Compare with the previous release: [v5.21.8...v5.21.9](https://github.com/corejslib/ext/compare/v5.21.8...v5.21.9)
+
 ### v5.21.8 (2026-05-11)
 
 **Bug fixes:**
