@@ -68,9 +68,12 @@ Ext.define( "Ext.data.proxy.Softvisio", {
             args = [ request.getJsonData() ];
         }
 
-        window[ Symbol.for( "app" ) ].api.call( method, ...args ).then( res => {
-            this.processResponse( res.ok, operation, request, res );
-        } );
+        globalThis[ Symbol.for( "app" ) ].api
+            .call( method, ...args )
+            .then( res => {
+                this.processResponse( res.ok, operation, request, res );
+            } )
+            .catch( e => console.error( e ) );
 
         return request;
     },
