@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.10 (2026-05-16)
+
+**Other changes:**
+
+- docs: update readme (● [f430871](https://github.com/corejslib/ext/commit/f430871); 👬 zdm)
+
+Compare with the previous release: [v5.21.9...v5.21.10](https://github.com/corejslib/ext/compare/v5.21.9...v5.21.10)
+
 ### v5.21.9 (2026-05-11)
 
 **Other changes:**
