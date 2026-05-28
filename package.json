@@ -1,6 +1,6 @@
 {
     "name": "@corejslib/ext",
-    "version": "5.21.11",
+    "version": "5.21.12",
     "description": "ExtJS patches",
     "keywords": [
         "softvisio",

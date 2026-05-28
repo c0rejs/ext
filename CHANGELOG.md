@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.12 (2026-05-28)
+
+**Other changes:**
+
+- build: remove registries from .npmrc (● [bba1d08](https://github.com/corejslib/ext/commit/bba1d08); 👬 zdm)
+
+Compare with the previous release: [v5.21.11...v5.21.12](https://github.com/corejslib/ext/compare/v5.21.11...v5.21.12)
+
 ### v5.21.11 (2026-05-16)
 
 **Other changes:**
