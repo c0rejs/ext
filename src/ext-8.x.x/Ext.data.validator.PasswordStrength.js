@@ -1,4 +1,4 @@
-import passwords from "#core/passwords";
+import passwords from "#core/crypto/passwords";
 
 Ext.define( "Ext.data.validator.PasswordStrength", {
     "extend": "Ext.data.validator.Validator",
@@ -8,11 +8,13 @@ Ext.define( "Ext.data.validator.PasswordStrength", {
     "weakMessage": l10n( "Password is weak" ),
 
     "config": {
-        "strength": "strong",
+        "allowWeakPasswords": false,
     },
 
     validate ( value ) {
-        if ( !passwords.checkPasswordStrength( value, { "strength": this.getStrength() } ).ok ) {
+        const data = passwords.checkPassword( value );
+
+        if ( !data.strong && !this.getAllowWeakPasswords() ) {
             return this.weakMessage;
         }
 
