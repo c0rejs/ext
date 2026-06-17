@@ -14,7 +14,7 @@ Ext.define( "Ext.data.validator.PasswordStrength", {
     validate ( value ) {
         const data = Passwords.default.checkPassword( value );
 
-        if ( !data.strong && !this.getAllowWeakPasswords() ) {
+        if ( !data.isStrong && !this.getAllowWeakPasswords() ) {
             return this.weakMessage;
         }
 
