@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.14 (2026-06-17)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: refactor passwords (● [4757670](https://github.com/corejslib/ext/commit/4757670), [aa757e0](https://github.com/corejslib/ext/commit/aa757e0); 👬 zdm)
+
+Compare with the previous release: [v5.21.13...v5.21.14](https://github.com/corejslib/ext/compare/v5.21.13...v5.21.14)
+
 ### v5.21.13 (2026-05-29)
 
 **Code refactoring:**
