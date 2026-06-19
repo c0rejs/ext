@@ -117,11 +117,7 @@ Ext.define( "Ext.data.proxy.Softvisio", {
 
     // serialize sorters
     encodeSorters ( sorters, preventArray ) {
-        const out = [];
-
-        for ( const sorter of sorters ) {
-            out.push( [ sorter.getProperty(), sorter.getDirection().toLowerCase() ] );
-        }
+        const out = Array.from( sorters, sorter => [ sorter.getProperty(), sorter.getDirection().toLowerCase() ] );
 
         return out;
     },
