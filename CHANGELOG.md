@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.16 (2026-07-02)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix md \_ escape (● [901983d](https://github.com/corejslib/ext/commit/901983d); 👬 zdm)
+
+Compare with the previous release: [v5.21.15...v5.21.16](https://github.com/corejslib/ext/compare/v5.21.15...v5.21.16)
+
 ### v5.21.15 (2026-06-19)
 
 **Other changes:**
