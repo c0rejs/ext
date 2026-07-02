@@ -761,7 +761,7 @@ Fixes:
 
 Fixes:
 
-- fix: order_by array
+- fix: order\_by array
 
 ### 5.17.9 (2023-09-17)
 
@@ -773,7 +773,7 @@ Fixes:
 
 Fixes:
 
-- fix: order_by param
+- fix: order\_by param
 
 ### 5.17.7 (2023-09-11)
 
@@ -1314,13 +1314,13 @@ Features:
 
 Fixes:
 
-- fix: total property renamed to total_rows
+- fix: total property renamed to total\_rows
 
 ### 5.4.0 (2021-11-17)
 
 Features:
 
-- feat: read next_page property
+- feat: read next\_page property
 
 ### 5.3.2 (2021-11-14)
 
