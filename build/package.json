@@ -23,7 +23,7 @@
         "build": "node bin/build.js"
     },
     "devDependencies": {
-        "@corejslib/core": "^7.192.0",
+        "@corejslib/core": "^8.0.0",
         "@sencha/cmd": "^8.0.0",
         "@sencha/ext": "8.0.0",
         "@sencha/ext-charts": "8.0.0",
