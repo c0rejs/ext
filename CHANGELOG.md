@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.17 (2026-07-06)
+
+**Other changes:**
+
+- build(deps): bunp @corejslib/core@^8.0.0 (● [1cff212](https://github.com/corejslib/ext/commit/1cff212); 👬 zdm)
+
+Compare with the previous release: [v5.21.16...v5.21.17](https://github.com/corejslib/ext/compare/v5.21.16...v5.21.17)
+
 ### v5.21.16 (2026-07-02)
 
 **Bug fixes:**
