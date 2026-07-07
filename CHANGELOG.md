@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.18 (2026-07-07)
+
+**Other changes:**
+
+- build(deps): bunp @softvisio/cli@^4.0.0 (● [6e828a5](https://github.com/corejslib/ext/commit/6e828a5); 👬 zdm)
+
+Compare with the previous release: [v5.21.17...v5.21.18](https://github.com/corejslib/ext/compare/v5.21.17...v5.21.18)
+
 ### v5.21.17 (2026-07-06)
 
 **Other changes:**
