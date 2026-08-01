@@ -36,7 +36,7 @@ const npm = new Npm( {
 // install npm dependencies
 res = await npm.exec( [ "install" ] );
 if ( !res.ok ) {
-    console.log( res.data.error.detail );
+    console.log( res );
 
     process.exit( 1 );
 }
