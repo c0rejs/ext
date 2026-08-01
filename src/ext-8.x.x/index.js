@@ -6,7 +6,7 @@ import "./froala.css";
 import "./Ext.Avatar.js";
 import "./Ext.Date.js";
 import "./Ext.data.field.BigInteger.js";
-import "./Ext.data.proxy.Softvisio.js";
+import "./Ext.data.proxy.Corejslib.js";
 import "./Ext.data.validator.Custom.js";
 import "./Ext.data.validator.PasswordStrength.js";
 import "./Ext.dataview.plugin.AutoPaging.js";

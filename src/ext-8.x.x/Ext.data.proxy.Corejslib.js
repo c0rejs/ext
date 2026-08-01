@@ -1,9 +1,9 @@
-Ext.define( "Ext.data.proxy.Softvisio", {
+Ext.define( "Ext.data.proxy.Corejslib", {
     "extend": "Ext.data.proxy.Server",
 
-    "alternateClassName": "Ext.data.SoftvisioProxy",
+    "alternateClassName": "Ext.data.CorejslibProxy",
 
-    "alias": "proxy.softvisio",
+    "alias": "proxy.corejslib",
 
     "idParam": "id",
     "filterParam": "where",
