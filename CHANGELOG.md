@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.19 (2026-08-01)
+
+**Bug fixes:**
+
+- \[PATCH] fix: update package keywords (● [6f1bb9b](https://github.com/corejslib/ext/commit/6f1bb9b); 👬 zdm)
+
+Compare with the previous release: [v5.21.18...v5.21.19](https://github.com/corejslib/ext/compare/v5.21.18...v5.21.19)
+
 ### v5.21.18 (2026-07-07)
 
 **Other changes:**
