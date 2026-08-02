@@ -66,7 +66,6 @@ const { "version": extVersion } = await readConfig( `${ tmpDir.path }/node_modul
         "shell": true,
         "stdio": "inherit",
     } );
-
     if ( res.status ) process.exit( 1 );
 
     res = childProcess.spawnSync( "patch --quiet --forward -p1 -i patch/patch", {
@@ -74,7 +73,6 @@ const { "version": extVersion } = await readConfig( `${ tmpDir.path }/node_modul
         "shell": true,
         "stdio": "inherit",
     } );
-
     if ( res.status ) process.exit( 1 );
 }
 
