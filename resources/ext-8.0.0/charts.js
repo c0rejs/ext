@@ -92,7 +92,7 @@ Ext.define( "Ext.draw.sprite.AnimationParser", function () {
     }
     return {
         "singleton": true,
-        "attributeRe": /^url\(#([A-Za-z-]+)\)$/,
+        "attributeRe": /^url\(#([a-zA-Z-]+)\)$/u,
         "color": {
             "parseInitial": function ( color1, color2 ) {
                 if ( Ext.isString( color1 ) ) {
@@ -380,7 +380,7 @@ Ext.define( "Ext.draw.Draw", {
             zs[ i ] *= r;
         }
         for ( i = ln - 2; i > 0; i-- ) {
-            r = 3.732_050_807_568_877 + 48.248_711_305_964_385 / ( -13.928_203_230_275_537 + 0.071_796_769_724_491_23 ** i );
+            r = 3.732050807568877 + 48.248711305964385 / ( -13.928203230275537 + 0.07179676972449123 ** i );
             zs[ i ] -= zs[ i + 1 ] * r;
         }
         ny = points[ 0 ];
@@ -582,7 +582,7 @@ Ext.define( "Ext.draw.Draw", {
             curY = dataY[ i + 1 ];
             nextX = dataX[ i + 2 ];
             nextY = dataY[ i + 2 ];
-            if ( !( Ext.isNumber( nextX ) && Ext.isNumber( nextY ) ) ) {
+            if ( !Ext.isNumber( nextX ) || !Ext.isNumber( nextY ) ) {
                 smoothX.push( x, curX, curX );
                 smoothY.push( y, curY, curY );
                 break;
@@ -609,7 +609,7 @@ Ext.define( "Ext.draw.Draw", {
         ? function () {
             this.iosUpdateEl = Ext.getBody().createChild( {
                 "data-sticky": true,
-                "style": "position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; " + "background: rgba(0,0,0,0.001); z-index: 100000",
+                "style": "position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; background: rgba(0,0,0,0.001); z-index: 100000",
             } );
         }
         : Ext.emptyFn,
@@ -642,10 +642,11 @@ Ext.define( "Ext.draw.gradient.Gradient", {
         for ( i = 0; i < ln; i++ ) {
             stop = newStops[ i ];
             color = stop.color;
-            if ( !( color && color.isColor ) ) {
+            if ( !color || !color.isColor ) {
                 color = Ext.util.Color.fly( color || Ext.util.Color.NONE );
             }
             stops.push( {
+
                 "offset": Math.min( 1, Math.max( 0, "offset" in stop
                     ? stop.offset
                     : stop.position || 0 ) ),
@@ -684,7 +685,7 @@ Ext.define( "Ext.draw.gradient.Gradient", {
  */
 Ext.define( "Ext.draw.gradient.GradientDefinition", {
     "singleton": true,
-    "urlStringRe": /^url\(#([\w-]+)\)$/,
+    "urlStringRe": /^url\(#([\w-]+)\)$/u,
     "gradients": {},
     "add": function ( gradients ) {
         var store = this.gradients,
@@ -723,7 +724,7 @@ Ext.define( "Ext.draw.gradient.GradientDefinition", {
  */
 Ext.define( "Ext.draw.sprite.AttributeParser", {
     "singleton": true,
-    "attributeRe": /^url\(#([A-Za-z-]+)\)$/,
+    "attributeRe": /^url\(#([a-zA-Z-]+)\)$/u,
     "default": Ext.identityFn,
     "string": function ( n ) {
         return String( n );
@@ -945,7 +946,7 @@ Ext.define( "Ext.draw.sprite.AttributeDefinition", {
          * E.g.: {@link Ext.draw.sprite.AttributeParser#enums enums},
          * {@link Ext.draw.sprite.AttributeParser#limited limited}.
          */
-        "processorFactoryRe": /^(\w+)\(([\w,\-]*)\)$/,
+        "processorFactoryRe": /^(\w+)\(([\w\-,]*)\)$/v,
     },
 
     // The sprite class for which AttributeDefinition instance is created.
@@ -1869,6 +1870,7 @@ Ext.define(
          * @return {Object} Object with b,c,d=devicePixelRatio,xx,yy,dx,dy
          */
         "precisionCompensate": function ( devicePixelRatio, comp ) {
+
             var elements = this.elements,
                 x2x = elements[ 0 ],
                 x2y = elements[ 1 ],
@@ -4896,7 +4898,7 @@ Ext.define(
             else {
                 elements = matrix;
             }
-            if ( !( Ext.isArray( elements ) && elements.length === 6 ) ) {
+            if ( !Ext.isArray( elements ) || elements.length !== 6 ) {
                 Ext.raise( "An instance of Ext.draw.Matrix or an array of 6 numbers is expected." );
             }
             spriteMatrix.prepend.apply( spriteMatrix, elements.slice() );
@@ -5300,8 +5302,8 @@ Ext.define(
 Ext.define( "Ext.draw.Path", {
     "statics": {
         "pathRe": /,?([achlmq-tvxz]),?/gi,
-        "pathRe2": /-/gi,
-        "pathSplitRe": /\s|,/g,
+        "pathRe2": /-/gv,
+        "pathSplitRe": /\s|,/gv,
     },
     "svgString": "",
 
@@ -5673,7 +5675,7 @@ Ext.define( "Ext.draw.Path", {
             eyx = yx,
             exy = xy,
             eyy = yy,
-            rho = 0.547_443_256_150_549,
+            rho = 0.547443256150549,
             temp,
             y1,
             x3,
@@ -5697,7 +5699,7 @@ Ext.define( "Ext.draw.Path", {
             eyy = -temp;
         }
         if ( theta2 ) {
-            y1 = ( 0.329_473_805_281_598_7 + 0.012_120_855_841_304_373 * theta2 ) * theta2;
+            y1 = ( 0.3294738052815987 + 0.012120855841304373 * theta2 ) * theta2;
             x3 = Math.cos( theta2 );
             y3 = Math.sin( theta2 );
             x2 = x3 + y1 * y3;
@@ -5901,7 +5903,7 @@ Ext.define( "Ext.draw.Path", {
                     me.closePath();
                     break;
                 case "s":
-                    if ( !( lastCommand === "c" || lastCommand === "C" || lastCommand === "s" || lastCommand === "S" ) ) {
+                    if ( lastCommand !== "c" && lastCommand !== "C" && lastCommand !== "s" && lastCommand !== "S" ) {
                         lastControlX = lastX;
                         lastControlY = lastY;
                     }
@@ -5911,7 +5913,7 @@ Ext.define( "Ext.draw.Path", {
                     }
                     break;
                 case "S":
-                    if ( !( lastCommand === "c" || lastCommand === "C" || lastCommand === "s" || lastCommand === "S" ) ) {
+                    if ( lastCommand !== "c" && lastCommand !== "C" && lastCommand !== "s" && lastCommand !== "S" ) {
                         lastControlX = lastX;
                         lastControlY = lastY;
                     }
@@ -5933,7 +5935,7 @@ Ext.define( "Ext.draw.Path", {
                     }
                     break;
                 case "t":
-                    if ( !( lastCommand === "q" || lastCommand === "Q" || lastCommand === "t" || lastCommand === "T" ) ) {
+                    if ( lastCommand !== "q" && lastCommand !== "Q" && lastCommand !== "t" && lastCommand !== "T" ) {
                         lastControlX = lastX;
                         lastControlY = lastY;
                     }
@@ -5943,7 +5945,7 @@ Ext.define( "Ext.draw.Path", {
                     }
                     break;
                 case "T":
-                    if ( !( lastCommand === "q" || lastCommand === "Q" || lastCommand === "t" || lastCommand === "T" ) ) {
+                    if ( lastCommand !== "q" && lastCommand !== "Q" && lastCommand !== "t" && lastCommand !== "T" ) {
                         lastControlX = lastX;
                         lastControlY = lastY;
                     }
@@ -6415,6 +6417,7 @@ Ext.define( "Ext.draw.overrides.hittest.Path", {
             switch ( commands[ i ] ) {
                 case "M":
                     if ( firstX !== null ) {
+
                         if ( solver.linesIntersection( firstX, firstY, lastX, lastY, origin.x, origin.y, x, y ) ) {
                             count += 1;
                         }
@@ -6424,6 +6427,7 @@ Ext.define( "Ext.draw.overrides.hittest.Path", {
                     j += 2;
                     break;
                 case "L":
+
                     if ( solver.linesIntersection( lastX, lastY, params[ j ], params[ j + 1 ], origin.x, origin.y, x, y ) ) {
                         count += 1;
                     }
@@ -6439,6 +6443,7 @@ Ext.define( "Ext.draw.overrides.hittest.Path", {
                     break;
                 case "Z":
                     if ( firstX !== null ) {
+
                         if ( solver.linesIntersection( firstX, firstY, lastX, lastY, origin.x, origin.y, x, y ) ) {
                             count += 1;
                         }
@@ -6985,7 +6990,7 @@ Ext.define( "Ext.draw.overrides.hittest.sprite.Path", {
      * @member Ext.draw.sprite.Path
      */
     "getIntersections": function ( path ) {
-        if ( !( path.isSprite && path.isPath ) ) {
+        if ( !path.isSprite || !path.isPath ) {
             return [];
         }
 
@@ -8021,10 +8026,10 @@ Ext.define( "Ext.draw.sprite.Instancing", {
     "applyTemplate": function ( template ) {
         var surface;
         if ( !Ext.isObject( template ) ) {
-            Ext.raise( "A template of an instancing sprite must either be " + "a sprite instance or a valid config object from which a template " + "sprite will be created." );
+            Ext.raise( "A template of an instancing sprite must either be a sprite instance or a valid config object from which a template sprite will be created." );
         }
         else if ( template.isInstancing || template.isComposite ) {
-            Ext.raise( "Can't use an instancing or composite sprite " + "as a template for an instancing sprite." );
+            Ext.raise( "Can't use an instancing or composite sprite as a template for an instancing sprite." );
         }
         if ( !template.isSprite ) {
             if ( !template.xclass && !template.type ) {
@@ -8931,7 +8936,7 @@ Ext.define( "Ext.draw.sprite.Text", function () {
         "extend": Ext.draw.sprite.Sprite,
         "alias": "sprite.text",
         "type": "text",
-        "lineBreakRe": /\r?\n/g,
+        "lineBreakRe": /\r?\n/gv,
         "statics": {
 
             /**
@@ -10456,7 +10461,7 @@ Ext.define( "Ext.draw.Surface", {
             item,
             i,
             ln;
-        if ( !( me.element && me.getDirty() && me.getRect() ) ) {
+        if ( !me.element || !me.getDirty() || !me.getRect() ) {
             return;
         }
         if ( me.dirtyPredecessorCount > 0 ) {
@@ -10618,7 +10623,7 @@ Ext.define( "Ext.draw.engine.SvgContext", {
     "shadowBlur": 0,
     "shadowColor": "none",
     "globalCompositeOperation": "src",
-    "urlStringRe": /^url\(#([\w-]+)\)$/,
+    "urlStringRe": /^url\(#([\w-]+)\)$/u,
     "constructor": function ( SvgSurface ) {
         var me = this;
         me.surface = SvgSurface;
@@ -11069,7 +11074,7 @@ Ext.define( "Ext.draw.engine.SvgContext", {
             width = dw;
             height = dh;
         }
-        element.dom.setAttributeNS( "http:/" + "/www.w3.org/1999/xlink", "href", image.src );
+        element.dom.setAttributeNS( "http://www.w3.org/1999/xlink", "href", image.src );
         me.surface.setElementAttributes( element, {
             "viewBox": viewBox,
             "x": x,
@@ -11553,7 +11558,7 @@ Ext.define( "Ext.draw.engine.Svg", {
             surface,
             rect,
             i;
-        svg = '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"' + ' width="' + size.width + '"' + ' height="' + size.height + '">';
+        svg = '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="' + size.width + '" height="' + size.height + '">';
         for ( i = 0; i < surfaces.length; i++ ) {
             surface = surfaces[ i ];
             if ( Ext.getClassName( surface ) !== className ) {
@@ -11573,7 +11578,7 @@ Ext.define( "Ext.draw.engine.Svg", {
         // on a Unicode string will cause a Character Out Of Range exception if a character
         // exceeds the range of a 8-bit ASCII-encoded character. More information:
         // https://developer.mozilla.org/en/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
-        return btoa( encodeURIComponent( str ).replaceAll( /%([\dA-F]{2})/g, function ( match, p1 ) {
+        return btoa( encodeURIComponent( str ).replaceAll( /%([0-9A-F]{2})/gv, function ( match, p1 ) {
             return String.fromCharCode( "0x" + p1 );
         } ) );
     },
@@ -17108,6 +17113,7 @@ Ext.define("Ext.chart.series.Series", {
             // 'showMarkers' updater calls 'series.getSprites()',
             // which we don't want to call here.
             showMarkers = me.getConfig("showMarkers", true),
+
             style,
             sprite,
             marker,
@@ -21025,6 +21031,7 @@ Ext.define("Ext.chart.axis.Axis", {
 Ext.define("Ext.chart.legend.LegendBase", {
     extend: Ext.dataview.DataView,
     config: {
+
         itemTpl: ['<span class="', Ext.baseCSSPrefix, "legend-item-marker {[ values.disabled ? Ext.baseCSSPrefix + 'legend-item-inactive' : '' ]}\" style=\"background:{mark};\"></span>{name}"],
         /* eslint-enable max-len, no-useless-escape */
         inline: true,
@@ -21670,6 +21677,7 @@ Ext.define("Ext.draw.PathUtil", function () {
          *                  is itself a two-item array [x,y].
          */
         cubicsIntersections: function (ax1, ax2, ax3, ax4, ay1, ay2, ay3, ay4, bx1, bx2, bx3, bx4, by1, by2, by3, by4) {
+
             var me = this,
                 axDim = me.cubicDimension(ax1, ax2, ax3, ax4),
                 ayDim = me.cubicDimension(ay1, ay2, ay3, ay4),
@@ -26027,6 +26035,7 @@ Ext.define("Ext.chart.axis.sprite.Axis3D", {
             attr = me.attr,
             halfLineWidth = attr.lineWidth * 0.5,
             layout = me.getLayout(),
+
             depth = layout.isDiscrete ? 0 : attr.depth,
             docked = attr.position,
             position,
@@ -26953,6 +26962,7 @@ Ext.define("Ext.chart.interactions.CrossZoom", {
             return;
         }
         if (me.getLocks()[me.gestureEvent] === me) {
+
             var chart = me.getChart(),
                 surface = me.getSurface(),
                 rect = chart.getInnerRect(),
@@ -26997,6 +27007,7 @@ Ext.define("Ext.chart.interactions.CrossZoom", {
             return;
         }
         if (me.getLocks()[me.gestureEvent] === me) {
+
             var chart = me.getChart(),
                 surface = me.getSurface(),
                 rect = chart.getInnerRect(),
@@ -28573,6 +28584,7 @@ Ext.define("Ext.chart.interactions.PanZoom", {
     },
     onZoomGestureStart: function (e) {
         if (e.touches && e.touches.length === 2) {
+
             var me = this,
                 chart = me.getChart(),
                 xy = chart.element.getXY(),
@@ -28596,6 +28608,7 @@ Ext.define("Ext.chart.interactions.PanZoom", {
     onZoomGestureMove: function (e) {
         var me = this;
         if (me.getLocks()[me.getZoomGesture()] === me) {
+
             var chart = me.getChart(),
                 rect = chart.getInnerRect(),
                 xy = chart.element.getXY(),
@@ -28777,6 +28790,7 @@ Ext.define("Ext.chart.interactions.PanZoom", {
         this.callParent();
     },
 });
+
 
 /**
  * @class Ext.chart.interactions.Rotate
@@ -35156,6 +35170,7 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
             attr = me.attr,
             hasGradients = (attr.fillStyle && attr.fillStyle.isGradient) || (attr.strokeStyle && attr.strokeStyle.isGradient);
         if (hasGradients && !attr.constrainGradients) {
+
             var midAngle = me.getMidAngle(),
                 margin = attr.margin,
                 cx = attr.centerX,
@@ -35279,6 +35294,7 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
         // If a slice is empty, don't display the label.
         // This behavior can be overridden by a renderer.
         if (labelTpl.display !== "none") {
+
             labelCfg.hidden = attr.startAngle == attr.endAngle;
         }
         if (labelTpl.attr.renderer) {
@@ -36475,6 +36491,7 @@ Ext.define("Ext.chart.series.sprite.Pie3DPart", {
             baseRotation = attr.baseRotation,
             startAngle = attr.startAngle + baseRotation,
             endAngle = attr.endAngle + baseRotation,
+
             isFullPie = !attr.startAngle && Ext.Number.isEqual(Math.PI * 2, attr.endAngle, 1.0e-7),
             thickness = attr.thickness,
             startRho = attr.startRho,
@@ -36865,6 +36882,7 @@ Ext.define(
                 renderer = me.getRenderer(),
                 rendererData = me.getRendererData(),
                 highlight = me.getHighlight(),
+
                 lastAngle = 0,
                 twoPi = Math.PI * 2,
                 // To avoid adjacent start/end part blinking (z-index jitter)

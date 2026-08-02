@@ -1,5 +1,6 @@
 import ElementParser from "./common/ElementParser.js";
 import {
+
     // doProp,
     // filterProp,
     isMenu,
@@ -60,7 +61,7 @@ export class ExtRouter extends WebComponentsBaseComponent {
         // div.style.overflow='scroll';
         div.style.borderWidth = "0px";
         div.style.backgroundColor = "#e8e8e8";
-        div.style.backgroundImage = "linear-gradient( 0deg, #f5f5f5 1.1px, transparent 0)," + "linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)";
+        div.style.backgroundImage = "linear-gradient( 0deg, #f5f5f5 1.1px, transparent 0),linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)";
         var el = Ext.get( div );
         this.props[ "hidden" ] = this[ "hidden" ];
         this.props.listeners = {};

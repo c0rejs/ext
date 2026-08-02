@@ -102,13 +102,13 @@ function _defineProperty ( obj, key, value ) {
     }
     else {
         var g;
-        if ( typeof globalThis.window !== "undefined" ) {
+        if ( typeof window !== "undefined" ) {
             g = globalThis;
         }
-        else if ( typeof globalThis.global !== "undefined" ) {
+        else if ( typeof global !== "undefined" ) {
             g = globalThis;
         }
-        else if ( typeof globalThis.self !== "undefined" ) {
+        else if ( typeof self !== "undefined" ) {
             g = globalThis;
         }
         else {
@@ -842,7 +842,7 @@ function _defineProperty ( obj, key, value ) {
                                         }
                                         else if ( arg.type === undefined ) {
                                             for ( key in arg ) {
-                                                scope[ key.replace( /^\$/, "" ) ] = arg[ key ];
+                                                scope[ key.replace( /^\$/v, "" ) ] = arg[ key ];
                                             }
                                         }
 
@@ -1780,7 +1780,7 @@ function _defineProperty ( obj, key, value ) {
                             {
                                 "key": "buildName",
                                 "value": function buildName ( name ) {
-                                    return name.replace( /^--/, "" ).replace( /^\$/, "" );
+                                    return name.replace( /^--/v, "" ).replace( /^\$/v, "" );
                                 },
                             },
                             {
@@ -1840,7 +1840,7 @@ function _defineProperty ( obj, key, value ) {
 
                     Fashion.apply( CssVariableManager.prototype, {
                         "$isExport": true,
-                        "nameRe": /^--/,
+                        "nameRe": /^--/v,
                     } );
 
                     module.exports = CssVariableManager;
@@ -1950,11 +1950,11 @@ function _defineProperty ( obj, key, value ) {
                                 "key": "parseValue",
                                 "value": function parseValue ( token ) {
                                     var rx = {
-                                            "number": /^(\d+)(px|pt|pc|cm|mm|in|em|rem|ex)?$/g,
-                                            "shortHexColor": /^#([\dA-Fa-f]{3})$/,
-                                            "longHexColor": /^#([\dA-Fa-f]{6})$/,
-                                            "functionCall": /^(\w+)\((.*)\)$/,
-                                            "parenList": /^\((.*?)\)$/,
+                                            "number": /^(\d+)(px|pt|pc|cm|mm|in|em|rem|ex)?$/gv,
+                                            "shortHexColor": /^#([A-F0-9]{3})$/iv,
+                                            "longHexColor": /^#([A-F0-9]{6})$/iv,
+                                            "functionCall": /^(\w+)\((.*)\)$/v,
+                                            "parenList": /^\((.*?)\)$/v,
                                         },
                                         match,
                                         value;
@@ -4508,7 +4508,7 @@ function _defineProperty ( obj, key, value ) {
                                 {
                                     "key": "tryGetNumber",
                                     "value": function tryGetNumber ( value ) {
-                                        if ( /^\d*$/.test( value ) ) {
+                                        if ( /^\d*$/v.test( value ) ) {
                                             value = Number.parseFloat( value );
                                         }
 
@@ -4593,10 +4593,10 @@ function _defineProperty ( obj, key, value ) {
 
                         "CONVERSION_TABLE": [
                             [ 1, 2.54, 6, 25.4, 72, 96 ], // in
-                            [ null, 1, 2.362_204_73, 10, 28.346_456_7, 37.795_276 ], // cm
-                            [ null, null, 1, 4.233_333_33, 12, 16 ], // pc
-                            [ null, null, null, 1, 2.834_645_67, 3.779_527_6 ], // mm
-                            [ null, null, null, null, 1, 1.333_333_3 ], // pt
+                            [ null, 1, 2.36220473, 10, 28.3464567, 37.795276 ], // cm
+                            [ null, null, 1, 4.23333333, 12, 16 ], // pc
+                            [ null, null, null, 1, 2.83464567, 3.7795276 ], // mm
+                            [ null, null, null, null, 1, 1.3333333 ], // pt
                             [ null, null, null, null, null, 1 ], // px
                         ],
                     } );
