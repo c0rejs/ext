@@ -1,5 +1,23 @@
 # Changelog
 
+### v5.21.20 (2026-08-02)
+
+**Bug fixes:**
+
+- \[PATCH] fix: allow scripts in package.json (● [0e1532c](https://github.com/corejslib/ext/commit/0e1532c); 👬 zdm)
+
+- \[PATCH] fix: fix build script (● [d88b6a2](https://github.com/corejslib/ext/commit/d88b6a2), [f8783a4](https://github.com/corejslib/ext/commit/f8783a4), [3154086](https://github.com/corejslib/ext/commit/3154086), [3a5c432](https://github.com/corejslib/ext/commit/3a5c432), [94ac367](https://github.com/corejslib/ext/commit/94ac367), [58aee07](https://github.com/corejslib/ext/commit/58aee07); 👬 zdm)
+
+**Other changes:**
+
+- chore: rebuild (● [2f9d6f3](https://github.com/corejslib/ext/commit/2f9d6f3); 👬 zdm)
+
+- chore: rename softvisio to corejslib (● [7acdd6b](https://github.com/corejslib/ext/commit/7acdd6b), [7e2d7c0](https://github.com/corejslib/ext/commit/7e2d7c0); 👬 zdm)
+
+- docs: update (● [e5bd08a](https://github.com/corejslib/ext/commit/e5bd08a); 👬 zdm)
+
+Compare with the previous release: [v5.21.19...v5.21.20](https://github.com/corejslib/ext/compare/v5.21.19...v5.21.20)
+
 ### v5.21.19 (2026-08-01)
 
 **Bug fixes:**
