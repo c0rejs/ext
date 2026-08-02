@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_field_Panel from "./Ext/field/Panel.js";
+import Ext_field_Panel from './Ext/field/Panel.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCFieldpanel extends Ext_field_Panel {
-    constructor () {
-        super( [], [] );
-        this.xtype = "fieldpanel";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'fieldpanel';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-fieldpanel" ) == undefined ) {
-        globalThis.customElements.define( "ext-fieldpanel", ElementParser.withParsedCallback( EWCFieldpanel ) );
-    }
+  if (window.customElements.get('ext-fieldpanel') == undefined) {
+    window.customElements.define('ext-fieldpanel', ElementParser.withParsedCallback(EWCFieldpanel));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-fieldpanel" ) == undefined ) {
-        globalThis.customElements.define( "ext-fieldpanel", EWCFieldpanel );
-    }
+catch(e) {
+  if (window.customElements.get('ext-fieldpanel') == undefined) {
+    window.customElements.define('ext-fieldpanel', EWCFieldpanel);
+  }
 }

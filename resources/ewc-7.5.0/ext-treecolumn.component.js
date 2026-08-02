@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_grid_column_Tree from "./Ext/grid/column/Tree.js";
+import Ext_grid_column_Tree from './Ext/grid/column/Tree.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCTreecolumn extends Ext_grid_column_Tree {
-    constructor () {
-        super( [], [] );
-        this.xtype = "treecolumn";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'treecolumn';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-treecolumn" ) == undefined ) {
-        globalThis.customElements.define( "ext-treecolumn", ElementParser.withParsedCallback( EWCTreecolumn ) );
-    }
+  if (window.customElements.get('ext-treecolumn') == undefined) {
+    window.customElements.define('ext-treecolumn', ElementParser.withParsedCallback(EWCTreecolumn));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-treecolumn" ) == undefined ) {
-        globalThis.customElements.define( "ext-treecolumn", EWCTreecolumn );
-    }
+catch(e) {
+  if (window.customElements.get('ext-treecolumn') == undefined) {
+    window.customElements.define('ext-treecolumn', EWCTreecolumn);
+  }
 }

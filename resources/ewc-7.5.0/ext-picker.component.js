@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_Picker from "./Ext/Picker.js";
+import Ext_Picker from './Ext/Picker.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCPicker extends Ext_Picker {
-    constructor () {
-        super( [], [] );
-        this.xtype = "picker";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'picker';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-picker" ) == undefined ) {
-        globalThis.customElements.define( "ext-picker", ElementParser.withParsedCallback( EWCPicker ) );
-    }
+  if (window.customElements.get('ext-picker') == undefined) {
+    window.customElements.define('ext-picker', ElementParser.withParsedCallback(EWCPicker));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-picker" ) == undefined ) {
-        globalThis.customElements.define( "ext-picker", EWCPicker );
-    }
+catch(e) {
+  if (window.customElements.get('ext-picker') == undefined) {
+    window.customElements.define('ext-picker', EWCPicker);
+  }
 }

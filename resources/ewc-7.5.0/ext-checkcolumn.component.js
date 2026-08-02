@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_grid_column_Check from "./Ext/grid/column/Check.js";
+import Ext_grid_column_Check from './Ext/grid/column/Check.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCCheckcolumn extends Ext_grid_column_Check {
-    constructor () {
-        super( [], [] );
-        this.xtype = "checkcolumn";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'checkcolumn';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-checkcolumn" ) == undefined ) {
-        globalThis.customElements.define( "ext-checkcolumn", ElementParser.withParsedCallback( EWCCheckcolumn ) );
-    }
+  if (window.customElements.get('ext-checkcolumn') == undefined) {
+    window.customElements.define('ext-checkcolumn', ElementParser.withParsedCallback(EWCCheckcolumn));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-checkcolumn" ) == undefined ) {
-        globalThis.customElements.define( "ext-checkcolumn", EWCCheckcolumn );
-    }
+catch(e) {
+  if (window.customElements.get('ext-checkcolumn') == undefined) {
+    window.customElements.define('ext-checkcolumn', EWCCheckcolumn);
+  }
 }

@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_grid_cell_Check from "./Ext/grid/cell/Check.js";
+import Ext_grid_cell_Check from './Ext/grid/cell/Check.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCCheckcell extends Ext_grid_cell_Check {
-    constructor () {
-        super( [], [] );
-        this.xtype = "checkcell";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'checkcell';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-checkcell" ) == undefined ) {
-        globalThis.customElements.define( "ext-checkcell", ElementParser.withParsedCallback( EWCCheckcell ) );
-    }
+  if (window.customElements.get('ext-checkcell') == undefined) {
+    window.customElements.define('ext-checkcell', ElementParser.withParsedCallback(EWCCheckcell));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-checkcell" ) == undefined ) {
-        globalThis.customElements.define( "ext-checkcell", EWCCheckcell );
-    }
+catch(e) {
+  if (window.customElements.get('ext-checkcell') == undefined) {
+    window.customElements.define('ext-checkcell', EWCCheckcell);
+  }
 }

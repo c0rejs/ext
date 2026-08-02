@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_tree_Tree from "./Ext/tree/Tree.js";
+import Ext_tree_Tree from './Ext/tree/Tree.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCTree extends Ext_tree_Tree {
-    constructor () {
-        super( [], [] );
-        this.xtype = "tree";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'tree';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-tree" ) == undefined ) {
-        globalThis.customElements.define( "ext-tree", ElementParser.withParsedCallback( EWCTree ) );
-    }
+  if (window.customElements.get('ext-tree') == undefined) {
+    window.customElements.define('ext-tree', ElementParser.withParsedCallback(EWCTree));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-tree" ) == undefined ) {
-        globalThis.customElements.define( "ext-tree", EWCTree );
-    }
+catch(e) {
+  if (window.customElements.get('ext-tree') == undefined) {
+    window.customElements.define('ext-tree', EWCTree);
+  }
 }

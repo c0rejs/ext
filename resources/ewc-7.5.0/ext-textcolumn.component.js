@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_grid_column_Text from "./Ext/grid/column/Text.js";
+import Ext_grid_column_Text from './Ext/grid/column/Text.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCTextcolumn extends Ext_grid_column_Text {
-    constructor () {
-        super( [], [] );
-        this.xtype = "textcolumn";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'textcolumn';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-textcolumn" ) == undefined ) {
-        globalThis.customElements.define( "ext-textcolumn", ElementParser.withParsedCallback( EWCTextcolumn ) );
-    }
+  if (window.customElements.get('ext-textcolumn') == undefined) {
+    window.customElements.define('ext-textcolumn', ElementParser.withParsedCallback(EWCTextcolumn));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-textcolumn" ) == undefined ) {
-        globalThis.customElements.define( "ext-textcolumn", EWCTextcolumn );
-    }
+catch(e) {
+  if (window.customElements.get('ext-textcolumn') == undefined) {
+    window.customElements.define('ext-textcolumn', EWCTextcolumn);
+  }
 }

@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_grid_menu_SortDesc from "./Ext/grid/menu/SortDesc.js";
+import Ext_grid_menu_SortDesc from './Ext/grid/menu/SortDesc.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCGridsortdescmenuitem extends Ext_grid_menu_SortDesc {
-    constructor () {
-        super( [], [] );
-        this.xtype = "gridsortdescmenuitem";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'gridsortdescmenuitem';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-gridsortdescmenuitem" ) == undefined ) {
-        globalThis.customElements.define( "ext-gridsortdescmenuitem", ElementParser.withParsedCallback( EWCGridsortdescmenuitem ) );
-    }
+  if (window.customElements.get('ext-gridsortdescmenuitem') == undefined) {
+    window.customElements.define('ext-gridsortdescmenuitem', ElementParser.withParsedCallback(EWCGridsortdescmenuitem));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-gridsortdescmenuitem" ) == undefined ) {
-        globalThis.customElements.define( "ext-gridsortdescmenuitem", EWCGridsortdescmenuitem );
-    }
+catch(e) {
+  if (window.customElements.get('ext-gridsortdescmenuitem') == undefined) {
+    window.customElements.define('ext-gridsortdescmenuitem', EWCGridsortdescmenuitem);
+  }
 }

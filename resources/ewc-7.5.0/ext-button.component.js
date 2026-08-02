@@ -1,19 +1,19 @@
-import ElementParser from "./common/ElementParser.js";
-import Ext_Button from "./Ext/Button.js";
+import Ext_Button from './Ext/Button.js';
+import ElementParser from './common/ElementParser.js';
 
 export default class EWCButton extends Ext_Button {
-    constructor () {
-        super( [], [] );
-        this.xtype = "button";
-    }
+  constructor() {
+    super ([], []);
+    this.xtype = 'button';
+  }
 }
 try {
-    if ( globalThis.customElements.get( "ext-button" ) == undefined ) {
-        globalThis.customElements.define( "ext-button", ElementParser.withParsedCallback( EWCButton ) );
-    }
+  if (window.customElements.get('ext-button') == undefined) {
+    window.customElements.define('ext-button', ElementParser.withParsedCallback(EWCButton));
+  }
 }
-catch {
-    if ( globalThis.customElements.get( "ext-button" ) == undefined ) {
-        globalThis.customElements.define( "ext-button", EWCButton );
-    }
+catch(e) {
+  if (window.customElements.get('ext-button') == undefined) {
+    window.customElements.define('ext-button', EWCButton);
+  }
 }
