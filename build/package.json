@@ -33,5 +33,23 @@
         "@sencha/ext-modern-theme-material": "8.0.0",
         "@sencha/ext-ux": "8.0.0",
         "@sencha/ext-web-components-modern": "7.5.0"
+    },
+    "allowScripts": {
+        "@corejslib/cli": true,
+        "@corejslib/core": true,
+        "@corejslib/uws": true,
+        "@sencha/cmd": true,
+        "@sencha/ext": true,
+        "@sencha/ext-charts": true,
+        "@sencha/ext-core": true,
+        "@sencha/ext-font-awesome": true,
+        "@sencha/ext-font-ext": true,
+        "@sencha/ext-google": true,
+        "@sencha/ext-modern": true,
+        "@sencha/ext-modern-theme-base": true,
+        "@sencha/ext-modern-theme-material": true,
+        "@sencha/ext-modern-theme-neptune": true,
+        "@sencha/ext-modern-treegrid": true,
+        "@sencha/ext-ux": true
     }
 }
