@@ -9,14 +9,27 @@ import { readConfig } from "#core/config";
 import { glob } from "#core/glob";
 import { TmpDir } from "#core/tmp";
 
-// XXX apt-get install -y openjdk-8-jre
-
 var res;
 
 const tmpDir = new TmpDir(),
     rootDir = path.dirname( module.createRequire( import.meta.url ).resolve( "#root/package.json" ) ),
     srcDir = path.join( tmpDir.path, "src/app" ),
     dataDir = path.join( rootDir, "data" );
+
+// install apt dependencies
+if ( process.platform === "linux" ) {
+    res = childProcess.spawnSync( "apt-get", [ "update" ], {
+        "cwd": tmpDir.path,
+        "stdio": "inherit",
+    } );
+    if ( res.status ) process.exit( 1 );
+
+    res = childProcess.spawnSync( "apt-get", [ "install", "-y", "openjdk-8-jre" ], {
+        "cwd": tmpDir.path,
+        "stdio": "inherit",
+    } );
+    if ( res.status ) process.exit( 1 );
+}
 
 const files = await glob( "*", {
     "cwd": rootDir,
@@ -38,7 +51,7 @@ const npm = new Npm( {
 // install npm dependencies
 res = await npm.exec( [ "install" ] );
 if ( !res.ok ) {
-    console.log( res );
+    console.log( res + "" );
 
     process.exit( 1 );
 }
