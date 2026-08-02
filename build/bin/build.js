@@ -9,6 +9,8 @@ import { readConfig } from "#core/config";
 import { glob } from "#core/glob";
 import { TmpDir } from "#core/tmp";
 
+// XXX apt-get install -y openjdk-8-jre
+
 var res;
 
 const tmpDir = new TmpDir(),
