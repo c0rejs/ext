@@ -172,32 +172,22 @@ await fs.promises.cp( `${ tmpDir.path }/node_modules/@sencha/ext-web-components-
 
 // lint
 {
+    console.log( "Compress css files" );
 
-    // console.log( "Compress css files" );
-    // childProcess.spawnSync( "npx ccli lint --action=compress --no-lintignore **/*.css", {
-    //     "cwd": dataDir,
-    //     "shell": true,
-    //     "stdio": "inherit",
-    // } );
-    // console.log();
-    // console.log( "Lint css files" );
-    // for ( let n = 0; n <= 1; n++ ) {
-    //     childProcess.spawnSync( "npx ccli lint --no-lintignore --no-log **/*.css", {
-    //         "cwd": dataDir,
-    //         "shell": true,
-    //         "stdio": "inherit",
-    //     } );
-    // }
-    // NOTE: take too long time, so disable it for now
-    // console.log();
-    // console.log( "Lint files" );
-    // for ( let n = 0; n <= 1; n++ ) {
-    //     childProcess.spawnSync( "npx ccli lint --no-lintignore --no-log", {
-    //         "cwd": dataDir,
-    //         "shell": true,
-    //         "stdio": "inherit",
-    //     } );
-    // }
+    childProcess.spawnSync( "npx ccli lint --action=compress --no-lintignore **/*.css", {
+        "cwd": dataDir,
+        "shell": true,
+        "stdio": "inherit",
+    } );
+
+    console.log();
+    console.log( "Lint files" );
+
+    childProcess.spawnSync( "npx ccli lint --no-lintignore --no-log --no-eslint", {
+        "cwd": dataDir,
+        "shell": true,
+        "stdio": "inherit",
+    } );
 }
 
 // move resources
