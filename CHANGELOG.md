@@ -1,5 +1,17 @@
 # Changelog
 
+### v5.21.21 (2026-08-03)
+
+**Bug fixes:**
+
+- \[PATCH] fix: disable lint (● [cca59ff](https://github.com/corejslib/ext/commit/cca59ff); 👬 zdm)
+
+**Other changes:**
+
+- chore: rebuild (● [fafe909](https://github.com/corejslib/ext/commit/fafe909); 👬 zdm)
+
+Compare with the previous release: [v5.21.20...v5.21.21](https://github.com/corejslib/ext/compare/v5.21.20...v5.21.21)
+
 ### v5.21.20 (2026-08-02)
 
 **Bug fixes:**
