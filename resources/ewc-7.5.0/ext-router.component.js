@@ -1,5 +1,5 @@
-import WebComponentsBaseComponent from './common/webcomponentsbase';
-import ElementParser from './common/ElementParser.js';
+import WebComponentsBaseComponent from "./common/webcomponentsbase";
+import ElementParser from "./common/ElementParser.js";
 
 import {
     //doProp,
@@ -8,28 +8,25 @@ import {
     isRenderercell,
     isParentGridAndChildColumn,
     isTooltip,
-    isPlugin
-} from './common/util.js';
+    isPlugin,
+} from "./common/util.js";
 
 export class ExtRouter extends WebComponentsBaseComponent {
     //prettier-ignore
     get hidden() {return this.getAttribute('hidden');}
     set hidden(hidden) {
-        this.setAttribute('hidden', hidden);
+        this.setAttribute("hidden", hidden);
     }
 
     static get observedAttributes() {
         var attrs = [];
-        attrs.push('hidden');
-        attrs.push('onready');
+        attrs.push("hidden");
+        attrs.push("onready");
         return attrs;
     }
 
     constructor() {
-        super (
-            [],
-            []
-        )
+        super([], []);
         this.router = new Router(window.routes);
     }
 
@@ -43,31 +40,29 @@ export class ExtRouter extends WebComponentsBaseComponent {
     }
 
     parsedCallback() {
-        this.createProps()
+        this.createProps();
     }
 
     createProps() {
         this.props = {};
-        var div = document.createElement('DIV');
-        div.setAttribute('id', 'route');
-        div.style.width = '100%';
-        div.style.height = '100%';
+        var div = document.createElement("DIV");
+        div.setAttribute("id", "route");
+        div.style.width = "100%";
+        div.style.height = "100%";
         div.style.padding = this.padding;
-        div.style.display = 'none';
+        div.style.display = "none";
         //mjg should not be hard coded
-        div.style.backgroundSize = '20px 20px';
+        div.style.backgroundSize = "20px 20px";
         //div.style.overflow='scroll';
-        div.style.borderWidth = '0px';
-        div.style.backgroundColor = '#e8e8e8';
-        div.style.backgroundImage =
-            'linear-gradient( 0deg, #f5f5f5 1.1px, transparent 0),' +
-            'linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)';
+        div.style.borderWidth = "0px";
+        div.style.backgroundColor = "#e8e8e8";
+        div.style.backgroundImage = "linear-gradient( 0deg, #f5f5f5 1.1px, transparent 0)," + "linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)";
         var el = Ext.get(div);
-        this.props['hidden'] = this['hidden'];
+        this.props["hidden"] = this["hidden"];
         this.props.listeners = {};
-        this.setEvent('onready', this.props, this);
-        this.props.xtype = 'widget';
-        this.props.ewc = 'router';
+        this.setEvent("onready", this.props, this);
+        this.props.xtype = "widget";
+        this.props.ewc = "router";
         this.props.element = el;
 
         var me = this;
@@ -79,11 +74,10 @@ export class ExtRouter extends WebComponentsBaseComponent {
         //Ext.onReady(function() {
         me.A.ext = Ext.create(me.props);
 
-        if (me.parentNode.nodeName.substring(0, 4) === 'EXT-') {
+        if (me.parentNode.nodeName.substring(0, 4) === "EXT-") {
             if (me.parentNode.A.ext !== undefined) {
-                me.addTheChild(me.parentNode.A.ext,me.A.ext);
-            }
-            else {
+                me.addTheChild(me.parentNode.A.ext, me.A.ext);
+            } else {
                 me.parentNode.A.CHILDREN.push(me.A.ext);
             }
         }
@@ -98,71 +92,68 @@ export class ExtRouter extends WebComponentsBaseComponent {
         //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
         //if (childxtype == 'widget')
         if (this.A.ext.initialConfig.align != undefined) {
-            if (parentxtype != 'tooltip' && parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
-                console.error('Can only use align property if parent is a Titlebar or Grid or Button');
+            if (parentxtype != "tooltip" && parentxtype != "titlebar" && parentxtype != "grid" && parentxtype != "lockedgrid" && parentxtype != "button") {
+                console.error("Can only use align property if parent is a Titlebar or Grid or Button");
                 return;
             }
         }
 
         switch (true) {
-        case isMenu(childxtype):
-            parentCmp.setMenu(childCmp);
-            break;
-        case isRenderercell(childxtype):
-            parentCmp.setCell(childCmp);
-            break;
-        case isParentGridAndChildColumn(parentxtype,childxtype):
-            if (location == null) {
-                parentCmp.addColumn(childCmp);
-            }
-            else {
-                var regCols = 0;
-                if (parentCmp.registeredColumns != undefined) {
-                    regCols = parentCmp.registeredColumns.length;
+            case isMenu(childxtype):
+                parentCmp.setMenu(childCmp);
+                break;
+            case isRenderercell(childxtype):
+                parentCmp.setCell(childCmp);
+                break;
+            case isParentGridAndChildColumn(parentxtype, childxtype):
+                if (location == null) {
+                    parentCmp.addColumn(childCmp);
+                } else {
+                    var regCols = 0;
+                    if (parentCmp.registeredColumns != undefined) {
+                        regCols = parentCmp.registeredColumns.length;
+                    }
+                    if (parentxtype == "grid") {
+                        parentCmp.insertColumn(location + regCols, childCmp);
+                    } else {
+                        parentCmp.insert(location + regCols, childCmp);
+                    }
                 }
-                if (parentxtype == 'grid') {
-                    parentCmp.insertColumn(location + regCols, childCmp);
+                break;
+            case isTooltip(childxtype):
+                parentCmp.setTooltip(childCmp);
+                break;
+            case isPlugin(childxtype):
+                parentCmp.setPlugin(childCmp);
+                break;
+            default:
+                if (location == null) {
+                    parentCmp.add(childCmp);
+                } else {
+                    parentCmp.insert(location, childCmp);
                 }
-                else {
-                    parentCmp.insert(location + regCols, childCmp);
-                }
-            }
-            break;
-        case isTooltip(childxtype):
-            parentCmp.setTooltip(childCmp);
-            break;
-        case isPlugin(childxtype):
-            parentCmp.setPlugin(childCmp);
-            break;
-        default:
-            if (location == null) {
-                parentCmp.add(childCmp);
-            }
-            else {
-                parentCmp.insert(location, childCmp);
-            }
         }
     }
 
     attributeChangedCallback(attr, oldVal, newVal) {
-        var route = document.getElementById('route');
+        var route = document.getElementById("route");
         if (route != null) {
-            if (attr == 'hidden') {
-                if (newVal == 'true') {
-                    route.style.display = 'none';
+            if (attr == "hidden") {
+                if (newVal == "true") {
+                    route.style.display = "none";
                 } else {
-                    route.style.display = 'block';
+                    route.style.display = "block";
                 }
             }
         } else {
             //console.log('route null: ' + attr + ' - ' + newVal)
         }
 
-        if (attr == 'onready') {
+        if (attr == "onready") {
             if (newVal) {
                 //mjg check if this event exists for this component
-                this.addEventListener(attr.slice(2), function(event) {
-                    eval(newVal + '(event)');
+                this.addEventListener(attr.slice(2), function (event) {
+                    eval(newVal + "(event)");
                 });
             } else {
                 //delete this[attr];
@@ -171,7 +162,7 @@ export class ExtRouter extends WebComponentsBaseComponent {
         }
     }
 }
-window.customElements.define('ext-router', ElementParser.withParsedCallback(ExtRouter))
+window.customElements.define("ext-router", ElementParser.withParsedCallback(ExtRouter));
 
 export function getRoutes(items) {
     //mjg clean this up
@@ -182,19 +173,12 @@ export function getRoutes(items) {
 }
 
 function _getRoutes(items) {
-    items.forEach(function(item) {
-        item.leaf = !item.hasOwnProperty('children');
-        item.hash = item.text.replace(/ /g, '');
+    items.forEach(function (item) {
+        item.leaf = !item.hasOwnProperty("children");
+        item.hash = item.text.replace(/ /g, "");
         item.hashlower = item.hash.toLowerCase();
         if (item.children == undefined) {
-            window._routes.push(
-                new Route(
-                    item.hash,
-                    item.hashlower,
-                    item.component,
-                    item.default
-                )
-            );
+            window._routes.push(new Route(item.hash, item.hashlower, item.component, item.default));
         } else {
             _getRoutes(item.children);
         }
@@ -206,7 +190,7 @@ export class Route {
     constructor(hash, hashlower, component, defaultRoute) {
         try {
             if (!hash) {
-                throw 'error: hash param is required';
+                throw "error: hash param is required";
             }
         } catch (e) {
             console.error(e);
@@ -220,7 +204,7 @@ export class Route {
     }
 
     isActiveRoute(hashedPath) {
-        return hashedPath.replace('#', '') === this.hash;
+        return hashedPath.replace("#", "") === this.hash;
     }
 }
 
@@ -229,7 +213,7 @@ export class Router {
         window.router = this;
         try {
             if (!routes) {
-                throw 'error: routes param is mandatory';
+                throw "error: routes param is mandatory";
             }
             this.routes = routes;
         } catch (e) {
@@ -241,7 +225,6 @@ export class Router {
         //console.log('routeMe')
         this.hasChanged(this, this.routes);
     }
-
 
     init() {
         //var routes = this.routes;
@@ -256,14 +239,13 @@ export class Router {
 
     hasChanged(scope, routes) {
         //console.log('hasChanged: ' + window.location.hash);
-        var currentHash = '';
-        var currentHashLower = '';
+        var currentHash = "";
+        var currentHashLower = "";
         var currentComponent = null;
         var i;
         var route;
 
         if (window.location.hash.length > 0) {
-
             for (i = 0; i < routes.length; i++) {
                 route = routes[i];
                 if (route.isActiveRoute(window.location.hash.substr(1))) {
@@ -274,25 +256,24 @@ export class Router {
             }
             var componentHtml;
             var code;
-            scope.rootElem = document.getElementById('route');
+            scope.rootElem = document.getElementById("route");
 
             if (scope.rootElem == null) {
-              setTimeout(function(){
-                scope.rootElem = document.getElementById('route');
-                scope.rootElem.style.display = 'block';
+                setTimeout(function () {
+                    scope.rootElem = document.getElementById("route");
+                    scope.rootElem.style.display = "block";
+                    window[currentHashLower] = new currentComponent();
+                    componentHtml = currentHash + "Component.html";
+                    code = window._code[currentHashLower][componentHtml];
+                    scope.rootElem.innerHTML = code;
+                }, 0);
+            } else {
+                //scope.rootElem = document.getElementById('route');
+                scope.rootElem.style.display = "block";
                 window[currentHashLower] = new currentComponent();
-                componentHtml = currentHash + 'Component.html';
+                componentHtml = currentHash + "Component.html";
                 code = window._code[currentHashLower][componentHtml];
                 scope.rootElem.innerHTML = code;
-                }, 0);
-            }
-            else {
-              //scope.rootElem = document.getElementById('route');
-              scope.rootElem.style.display = 'block';
-              window[currentHashLower] = new currentComponent();
-              componentHtml = currentHash + 'Component.html';
-              code = window._code[currentHashLower][componentHtml];
-              scope.rootElem.innerHTML = code;
             }
         } else {
             //var currentHash = '';
@@ -306,15 +287,15 @@ export class Router {
                     currentComponent = route.component;
                 }
             }
-            if (currentHash == '') {
+            if (currentHash == "") {
                 //console.log('no default route specified')
             } else {
                 //console.log(scope)
-                console.log('the else')
-                scope.rootElem = document.getElementById('route'); //mjg
-                scope.rootElem.style.display = 'block';
+                console.log("the else");
+                scope.rootElem = document.getElementById("route"); //mjg
+                scope.rootElem.style.display = "block";
                 window[currentHashLower] = new currentComponent();
-                componentHtml = currentHash + 'Component.html';
+                componentHtml = currentHash + "Component.html";
                 //scope.rootElem.innerHTML = window._code[currentHashLower][componentHtml];
             }
         }
