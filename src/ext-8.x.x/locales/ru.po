@@ -13,146 +13,146 @@ msgstr ""
 "X-Search-Path: ../**:/resources/**\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: ../../../resources/ext-8.0.0/ext.js:229300:12
+#: ../../../resources/ext-8.0.0/ext.js:210401:10
 msgid "Add to grouping"
 msgstr "Добавить в группировку"
 
-#: ../../../resources/ext-8.0.0/ext.js:206999:24
+#: ../../../resources/ext-8.0.0/ext.js:189728:22
 #: ../Ext.override.panel.TimeView.js:15:24
 msgid "Cancel"
 msgstr "Отменить"
 
-#: ../../../resources/ext-8.0.0/ext.js:167499:25
+#: ../../../resources/ext-8.0.0/ext.js:153226:23
 msgid "Close panel"
 msgstr "Закрыть панель"
 
-#: ../../../resources/ext-8.0.0/ext.js:229460:20
+#: ../../../resources/ext-8.0.0/ext.js:210563:18
 msgid "Collapse all"
 msgstr "Свернуть все"
 
-#: ../../../resources/ext-8.0.0/ext.js:229366:12
-#: ../../../resources/ext-8.0.0/ext.js:248490:25
-#: ../../../resources/ext-8.0.0/ext.js:248514:32
+#: ../../../resources/ext-8.0.0/ext.js:210468:10
+#: ../../../resources/ext-8.0.0/ext.js:228211:23
+#: ../../../resources/ext-8.0.0/ext.js:228244:30
 msgid "Columns"
 msgstr "Колонки"
 
-#: ../../../resources/ext-8.0.0/ext.js:248460:33
+#: ../../../resources/ext-8.0.0/ext.js:228182:31
 msgid "Customize"
 msgstr "Настроить"
 
-#: ../../../resources/ext-8.0.0/ext.js:210561:19
+#: ../../../resources/ext-8.0.0/ext.js:192956:17
 msgid "Day"
 msgstr "День"
 
-#: ../../../resources/ext-8.0.0/ext.js:206967:24
-#: ../../../resources/ext-8.0.0/ext.js:248464:40
+#: ../../../resources/ext-8.0.0/ext.js:189697:22
+#: ../../../resources/ext-8.0.0/ext.js:228186:38
 msgid "Done"
 msgstr "Готово"
 
-#: ../../../resources/ext-8.0.0/ext.js:229455:20
+#: ../../../resources/ext-8.0.0/ext.js:210558:18
 msgid "Expand all"
 msgstr "Развернуть все"
 
-#: ../../../resources/ext-8.0.0/ext.js:229435:12
+#: ../../../resources/ext-8.0.0/ext.js:210539:10
 msgid "Group by this field"
 msgstr "Группировать по этому полю"
 
-#: ../../../resources/ext-8.0.0/ext.js:140052:15
+#: ../../../resources/ext-8.0.0/ext.js:127865:13
 msgid "Is a value that has been excluded"
 msgstr "Значение, которое было исключено"
 
-#: ../../../resources/ext-8.0.0/ext.js:139582:19
-#: ../../../resources/ext-8.0.0/ext.js:175117:29
+#: ../../../resources/ext-8.0.0/ext.js:127421:17
+#: ../../../resources/ext-8.0.0/ext.js:160281:27
 msgid "Is in the wrong format"
 msgstr "В неправильном формате"
 
-#: ../../../resources/ext-8.0.0/ext.js:139620:15
-#: ../../../resources/ext-8.0.0/ext.js:139646:15
+#: ../../../resources/ext-8.0.0/ext.js:127455:13
+#: ../../../resources/ext-8.0.0/ext.js:127479:13
 msgid "Is not a valid CIDR block"
 msgstr "Неправильное значение CIDR"
 
-#: ../../../resources/ext-8.0.0/ext.js:139811:15
+#: ../../../resources/ext-8.0.0/ext.js:127628:13
 msgid "Is not a valid currency amount"
 msgstr "Неправильное значение валюты"
 
-#: ../../../resources/ext-8.0.0/ext.js:139913:15
+#: ../../../resources/ext-8.0.0/ext.js:127718:13
 msgid "Is not a valid date"
 msgstr "Значение не является правильной датой"
 
-#: ../../../resources/ext-8.0.0/ext.js:139941:15
+#: ../../../resources/ext-8.0.0/ext.js:127759:13
 msgid "Is not a valid date and time"
 msgstr "Значение не является правильной датой и временем"
 
-#: ../../../resources/ext-8.0.0/ext.js:139970:15
+#: ../../../resources/ext-8.0.0/ext.js:127786:13
 msgid "Is not a valid email address"
 msgstr "Неверный email адрес"
 
-#: ../../../resources/ext-8.0.0/ext.js:140077:15
+#: ../../../resources/ext-8.0.0/ext.js:127889:13
 msgid "Is not a valid IP address"
 msgstr "Не верный IP адрес"
 
-#: ../../../resources/ext-8.0.0/ext.js:139678:19
+#: ../../../resources/ext-8.0.0/ext.js:127508:17
 msgid "Is not a valid number"
 msgstr "Значение не является допустимым числом"
 
-#: ../../../resources/ext-8.0.0/ext.js:140221:15
+#: ../../../resources/ext-8.0.0/ext.js:128022:13
 msgid "Is not a valid phone number"
 msgstr "Значение не является правильным номером телефона"
 
-#: ../../../resources/ext-8.0.0/ext.js:140318:15
+#: ../../../resources/ext-8.0.0/ext.js:128106:13
 msgid "Is not a valid time"
 msgstr "Значение не является правильным временем"
 
-#: ../../../resources/ext-8.0.0/ext.js:140345:15
+#: ../../../resources/ext-8.0.0/ext.js:128131:13
 msgid "Is not a valid URL"
 msgstr "Значение не является правильным URL"
 
-#: ../../../resources/ext-8.0.0/ext.js:140106:15
+#: ../../../resources/ext-8.0.0/ext.js:127915:13
 msgid "Is not in the list of acceptable values"
 msgstr "Не в списке разрешенных значений"
 
-#: ../../../resources/ext-8.0.0/ext.js:140138:22
+#: ../../../resources/ext-8.0.0/ext.js:127946:20
 msgid "Length must be at least {0}"
 msgstr "Длина должна быть как минимум {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:140154:19
+#: ../../../resources/ext-8.0.0/ext.js:127960:17
 msgid "Length must be between {0} and {1}"
 msgstr "Длина должна быть между {0} и {1}"
 
-#: ../../../resources/ext-8.0.0/ext.js:140146:22
+#: ../../../resources/ext-8.0.0/ext.js:127953:20
 msgid "Length must be no more than {0}"
 msgstr "Длина не должна быть больше {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:241982:32
+#: ../../../resources/ext-8.0.0/ext.js:222113:26
 msgid "Locked"
 msgstr "Закреплена"
 
-#: ../../../resources/ext-8.0.0/ext.js:242084:32
+#: ../../../resources/ext-8.0.0/ext.js:222208:26
 msgid "Locked (Left)"
 msgstr "Закреплена (слева)"
 
-#: ../../../resources/ext-8.0.0/ext.js:242098:32
+#: ../../../resources/ext-8.0.0/ext.js:222222:26
 msgid "Locked (Right)"
 msgstr "Закреплена (справа)"
 
-#: ../../../resources/ext-8.0.0/ext.js:210554:21
+#: ../../../resources/ext-8.0.0/ext.js:192950:19
 msgid "Month"
 msgstr "Месяц"
 
-#: ../../../resources/ext-8.0.0/ext.js:140271:22
+#: ../../../resources/ext-8.0.0/ext.js:128061:20
 msgid "Must be at least {0}"
 msgstr "Должно быть минимум {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:140285:19
+#: ../../../resources/ext-8.0.0/ext.js:128073:17
 msgid "Must be between {0} and {1}"
 msgstr "Должно быть между {0} и {1}"
 
-#: ../../../resources/ext-8.0.0/ext.js:140278:22
+#: ../../../resources/ext-8.0.0/ext.js:128067:20
 msgid "Must be no more than than {0}"
 msgstr "Значение должно быть не больше {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:139486:24
-#: ../../../resources/ext-8.0.0/ext.js:140176:19
+#: ../../../resources/ext-8.0.0/ext.js:127331:22
+#: ../../../resources/ext-8.0.0/ext.js:127981:17
 msgid "Must be present"
 msgstr "Должно присутствовать"
 
@@ -160,19 +160,19 @@ msgstr "Должно присутствовать"
 msgid "Password is weak"
 msgstr "Пароль слабый"
 
-#: ../../../resources/ext-8.0.0/ext.js:229479:12
+#: ../../../resources/ext-8.0.0/ext.js:210581:10
 msgid "Remove from grouping"
 msgstr "Удалить из группировки"
 
-#: ../../../resources/ext-8.0.0/ext.js:229496:12
+#: ../../../resources/ext-8.0.0/ext.js:210597:10
 msgid "Show in groups"
 msgstr "Показать в группах"
 
-#: ../../../resources/ext-8.0.0/ext.js:229745:12
+#: ../../../resources/ext-8.0.0/ext.js:210829:10
 msgid "Sort ascending"
 msgstr "Сортировать по возрастанию"
 
-#: ../../../resources/ext-8.0.0/ext.js:229765:12
+#: ../../../resources/ext-8.0.0/ext.js:210848:10
 msgid "Sort descending"
 msgstr "Сортировать по убыванию"
 
@@ -184,47 +184,47 @@ msgstr "Дата в этом поле должна быть равна или б
 msgid "The date in this field must be equal to or before {0}"
 msgstr "Дата в этом поле должна быть равна или меньше {0}."
 
-#: ../../../resources/ext-8.0.0/ext.js:215107:24
+#: ../../../resources/ext-8.0.0/ext.js:197202:18
 msgid "The maximum decimal places is {0}"
 msgstr "Максимальное количество знаков после запятой: {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:215098:24
+#: ../../../resources/ext-8.0.0/ext.js:197194:18
 msgid "The maximum value for this field is {0}"
 msgstr "Максимальное значение для этого поля: {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:215090:24
+#: ../../../resources/ext-8.0.0/ext.js:197187:18
 msgid "The minimum value for this field is {0}"
 msgstr "Минимальное значение для этого поля: {0}."
 
-#: ../../../resources/ext-8.0.0/ext.js:89193:29
+#: ../../../resources/ext-8.0.0/ext.js:81115:27
 msgid "This field is invalid"
 msgstr "Это значение неверно"
 
-#: ../../../resources/ext-8.0.0/ext.js:175055:27
+#: ../../../resources/ext-8.0.0/ext.js:160223:25
 msgid "This field is required"
 msgstr "Это поле обязательно к заполнению"
 
-#: ../../../resources/ext-8.0.0/ext.js:242091:32
+#: ../../../resources/ext-8.0.0/ext.js:222215:26
 msgid "Unlocked"
 msgstr "Не закреплена"
 
-#: ../../../resources/ext-8.0.0/ext.js:215108:28
+#: ../../../resources/ext-8.0.0/ext.js:197203:22
 msgid "Value is not a valid number"
 msgstr "Значение не является допустимым числом"
 
-#: ../../../resources/ext-8.0.0/ext.js:139510:23
+#: ../../../resources/ext-8.0.0/ext.js:127352:21
 msgid "Value must be between {0} and {1}"
 msgstr "Щначение должно быть между {0} и {1}"
 
-#: ../../../resources/ext-8.0.0/ext.js:139494:26
+#: ../../../resources/ext-8.0.0/ext.js:127338:24
 msgid "Value must be greater than {0}"
 msgstr "Значение должно быть больше {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:139502:26
+#: ../../../resources/ext-8.0.0/ext.js:127345:24
 msgid "Value must be less than {0}"
 msgstr "Значение должно быть меньше {0}"
 
-#: ../../../resources/ext-8.0.0/ext.js:210568:20
+#: ../../../resources/ext-8.0.0/ext.js:192962:18
 msgid "Year"
 msgstr "Год"
 
