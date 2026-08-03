@@ -1,5 +1,17 @@
 # Changelog
 
+### v5.21.23 (2026-08-03)
+
+**Other changes:**
+
+- chore: enable resources lint on build (● [92eacc6](https://github.com/corejslib/ext/commit/92eacc6); 👬 zdm)
+
+- chore: update translations (● [108eba9](https://github.com/corejslib/ext/commit/108eba9); 👬 zdm)
+
+- style: lint resources (● [001c491](https://github.com/corejslib/ext/commit/001c491); 👬 zdm)
+
+Compare with the previous release: [v5.21.22...v5.21.23](https://github.com/corejslib/ext/compare/v5.21.22...v5.21.23)
+
 ### v5.21.22 (2026-08-03)
 
 **Other changes:**
