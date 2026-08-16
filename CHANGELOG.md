@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.25 (2026-08-16)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix glob api (● [190a571](https://github.com/corejslib/ext/commit/190a571); 👬 zdm)
+
+Compare with the previous release: [v5.21.24...v5.21.25](https://github.com/corejslib/ext/compare/v5.21.24...v5.21.25)
+
 ### v5.21.24 (2026-08-04)
 
 **Other changes:**
