@@ -6,7 +6,7 @@ import module from "node:module";
 import path from "node:path";
 import Npm from "#core/api/npm";
 import { readConfig } from "#core/config";
-import { glob } from "#core/glob";
+import { glob } from "#core/fs";
 import { TmpDir } from "#core/tmp";
 
 var res;
