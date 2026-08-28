@@ -1,5 +1,13 @@
 # Changelog
 
+### v5.21.26 (2026-08-28)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix shebang (● [05d52cb](https://github.com/corejslib/ext/commit/05d52cb); 👬 zdm)
+
+Compare with the previous release: [v5.21.25...v5.21.26](https://github.com/corejslib/ext/compare/v5.21.25...v5.21.26)
+
 ### v5.21.25 (2026-08-16)
 
 **Bug fixes:**
